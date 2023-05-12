@@ -11,5 +11,8 @@ interface IAccountERC6551 {
 
     function owner() external pure returns (address);
 
-    // function account() external pure returns (address);
+    function token()
+        external
+        view
+        returns (address tokenCollection, uint256 tokenId);
 }

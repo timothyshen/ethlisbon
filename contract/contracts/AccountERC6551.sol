@@ -6,10 +6,12 @@ import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/interfaces/IERC165.sol";
 import "@openzeppelin/contracts/interfaces/IERC1271.sol";
 import "@openzeppelin/contracts/utils/cryptography/SignatureChecker.sol";
+
 import "./interface/IAccountERC6551.sol";
+import "./lib/AccountLib.sol";
+import "./MinimalReceiver.sol";
 
-contract AccountERC6551 is IERC165, IERC1271, IAccountERC6551 {
-
+contract AccountERC6551 is IERC165, IERC1271, IAccountERC6551, MinimalReceiver {
     error NotAuthorized();
 
     // Transfer call must be called by Owner of the token
@@ -34,9 +36,24 @@ contract AccountERC6551 is IERC165, IERC1271, IAccountERC6551 {
         return address(0);
     }
 
+    function token()
+        public
+        view
+        returns (address tokenCollection, uint256 tokenId)
+    {
+        (, tokenCollection, tokenId) = AccountLib.token();
+        return (tokenCollection, tokenId);
+    }
+
     //++++++++++++++++++++++++++++Support Function+++++++++++++++++++++++++++++++++++++++++++++
 
-    function supportsInterface(bytes4 interfaceId) public pure returns (bool) {
+    function supportsInterface(bytes4 interfaceId)
+        public
+        view
+        virtual
+        override(IERC165, ERC1155Receiver)
+        returns (bool)
+    {
         return (interfaceId == type(IERC165).interfaceId ||
             interfaceId == type(IAccountERC6551).interfaceId);
     }

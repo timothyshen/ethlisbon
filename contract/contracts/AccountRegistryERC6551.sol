@@ -22,12 +22,12 @@ contract AccountRegistryERC6551 is IAccountRegistryERC6551 {
         return _createAccount(block.chainid, _tokenAddress, _tokenId);
     }
 
-    // function account(
-    //     address _tokenAddress,
-    //     uint256 _tokenId
-    // ) external view returns (address) {
-    //     return _account(block.chainid, _tokenAddress, _tokenId);
-    // }
+    function account(
+        address _tokenAddress,
+        uint256 _tokenId
+    ) external view returns (address) {
+        return _account(block.chainid, _tokenAddress, _tokenId);
+    }
 
     function _createAccount(
         uint256 _chainId,
@@ -56,7 +56,7 @@ contract AccountRegistryERC6551 is IAccountRegistryERC6551 {
             keccak256(code)
         );
 
-        // if (NewAccount.code.length != 0) return _account;
+        if (NewAccount.code.length != 0) return NewAccount;
 
         emit AccountCreated(
             NewAccount,
@@ -72,11 +72,30 @@ contract AccountRegistryERC6551 is IAccountRegistryERC6551 {
         return NewAccount;
     }
 
-    // function _account(
-    //     uint256 _chainId,
-    //     address _tokenAddress,
-    //     uint256 _tokenId
-    // ) internal returns (address) {
-    //     return _tokenAddress;
-    // }
+    function _account(
+        uint256 _chainId,
+        address _tokenAddress,
+        uint256 _tokenId
+    ) internal view returns (address) {
+        bytes memory encodedTokenData = abi.encode(
+            _chainId,
+            _tokenAddress,
+            _tokenId
+        );
+
+        bytes32 salt = keccak256(encodedTokenData);
+
+        bytes memory code = AccountLib.getByteCode(
+            _chainId,
+            _tokenAddress,
+            accountERC6551,
+            _tokenId,
+            salt
+        );
+        address NewAccount = Create2.computeAddress(
+            bytes32(salt),
+            keccak256(code)
+        );
+        return NewAccount;
+    }
 }

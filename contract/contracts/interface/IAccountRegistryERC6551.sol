@@ -17,8 +17,8 @@ interface IAccountRegistryERC6551 {
         uint256 _tokenId
     ) external returns (address);
 
-    // function account(
-    //     address _tokenAddress,
-    //     uint256 _tokenId
-    // ) external view returns (address);
+    function account(
+        address _tokenAddress,
+        uint256 _tokenId
+    ) external view returns (address);
 }
