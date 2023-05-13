@@ -17,11 +17,7 @@ export function ERC721Mint() {
     ],
   });
 
-  const {
-    data: balance,
-    isLoading: tokenIDLoading,
-    isSuccess: tokenIDSuccess,
-  } = useContractRead({
+  const { data: balance, isSuccess: tokenIDSuccess } = useContractRead({
     address: AccountERC721,
     abi: AccountERC721abi,
     functionName: "tokenID",
@@ -29,4 +25,15 @@ export function ERC721Mint() {
 
   // Return the mint function and the loading state
   return { mintNFT, mintSuccess, tokenIDSuccess, balance, mintLoading };
+}
+
+export function ownerOfToken(tokenId: number) {
+  const { data: owner, isSuccess: ownerSuccess } = useContractRead({
+    address: AccountERC721,
+    abi: AccountERC721abi,
+    functionName: "ownerOf",
+    args: [tokenId],
+  });
+
+  return { owner, ownerSuccess };
 }

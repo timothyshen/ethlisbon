@@ -15,6 +15,7 @@ const MintButton: React.FC = () => {
       await RegisterAccount(balance?.toString());
     }
   };
+  console.log("registerData", registerData);
   return (
     <>
       <Button
@@ -33,6 +34,7 @@ const MintButton: React.FC = () => {
       </Button>
       {createSuccess && <p>Account Created</p>}
       {createError && <p>Account Creation Failed</p>}
+      {registerData && <p>Account Registered</p>}
     </>
   );
 };
