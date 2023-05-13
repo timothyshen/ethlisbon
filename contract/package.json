@@ -2,7 +2,8 @@
   "name": "hardhat-project",
   "scripts": {
     "prettier": "npx prettier --write 'contracts/**/*.sol'",
-    "compile": "npx hardhat compile"
+    "compile": "npx hardhat compile",
+    "test": " npx hardhat test ./test/AccountERC6551.ts"
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-chai-matchers": "^1.0.6",

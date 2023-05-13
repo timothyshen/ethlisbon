@@ -5,6 +5,7 @@ pragma solidity ^0.8.0;
 import "./AccountERC6551.sol";
 import "./interface/IAccountRegistryERC6551.sol";
 import "./lib/AccountLib.sol";
+import "hardhat/console.sol";
 
 contract AccountRegistryERC6551 is IAccountRegistryERC6551 {
     address public immutable accountERC6551;
@@ -19,14 +20,16 @@ contract AccountRegistryERC6551 is IAccountRegistryERC6551 {
         address _tokenAddress,
         uint256 _tokenId
     ) external returns (address) {
-        return _createAccount(block.chainid, _tokenAddress, _tokenId);
+        address cAccount = _createAccount(block.chainid, _tokenAddress, _tokenId);
+        return cAccount;
     }
 
     function account(
         address _tokenAddress,
         uint256 _tokenId
     ) external view returns (address) {
-        return _account(block.chainid, _tokenAddress, _tokenId);
+        address account2 = _account(block.chainid, _tokenAddress, _tokenId);
+        return account2;
     }
 
     function _createAccount(

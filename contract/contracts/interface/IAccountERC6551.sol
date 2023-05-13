@@ -9,7 +9,7 @@ interface IAccountERC6551 {
         bytes calldata data
     ) external payable returns (bytes memory result);
 
-    function owner() external pure returns (address);
+    function owner() external view returns (address);
 
     function token()
         external

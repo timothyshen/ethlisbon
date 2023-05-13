@@ -11,6 +11,8 @@ import "./interface/IAccountERC6551.sol";
 import "./lib/AccountLib.sol";
 import "./MinimalReceiver.sol";
 
+import "hardhat/console.sol";
+
 contract AccountERC6551 is IERC165, IERC1271, IAccountERC6551, MinimalReceiver {
     error NotAuthorized();
 
@@ -26,14 +28,13 @@ contract AccountERC6551 is IERC165, IERC1271, IAccountERC6551, MinimalReceiver {
         return _call(to, value, data);
     }
 
-    function owner() public pure returns (address) {
-        // (uint256 chainId, address tokenCollection, uint256 tokenId) = context();
+    function owner() public view returns (address) {
+        (address tokenCollection, uint256 tokenId) = token();
 
-        // if (chainId != block.chainid) {
-        //     return address(0);
-        // }
-
-        return address(0);
+        if (tokenCollection == address(0)) {
+            return address(0);
+        }
+        return IERC721(tokenCollection).ownerOf(tokenId);
     }
 
     function token()
@@ -47,15 +48,12 @@ contract AccountERC6551 is IERC165, IERC1271, IAccountERC6551, MinimalReceiver {
 
     //++++++++++++++++++++++++++++Support Function+++++++++++++++++++++++++++++++++++++++++++++
 
-    function supportsInterface(bytes4 interfaceId)
-        public
-        view
-        virtual
-        override(IERC165, ERC1155Receiver)
-        returns (bool)
-    {
+    function supportsInterface(
+        bytes4 interfaceId
+    ) public view virtual override(IERC165, ERC1155Receiver) returns (bool) {
         return (interfaceId == type(IERC165).interfaceId ||
-            interfaceId == type(IAccountERC6551).interfaceId);
+            interfaceId == type(IAccountERC6551).interfaceId ||
+            interfaceId == type(IERC1271).interfaceId);
     }
 
     function isValidSignature(
