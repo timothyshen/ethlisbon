@@ -46,8 +46,8 @@ contract UpstarNFT is
         return tokenId;
     }
 
-    function tokenID(address to) public view returns (uint256) {
-        
+    function tokenID() public view returns (uint256) {
+        return _tokenIdCounter.current();
     }
 
     function _beforeTokenTransfer(
