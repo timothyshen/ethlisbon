@@ -5,13 +5,11 @@ pragma solidity ^0.8.0;
 import "./AccountERC6551.sol";
 import "./interface/IAccountRegistryERC6551.sol";
 import "./lib/AccountLib.sol";
-import "hardhat/console.sol";
+// import "hardhat/console.sol";
 
 contract AccountRegistryERC6551 is IAccountRegistryERC6551 {
     address public immutable accountERC6551;
-
-    error InitializationFailed();
-
+    
     constructor(address _accountERC6551) {
         accountERC6551 = _accountERC6551;
     }

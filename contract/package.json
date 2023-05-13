@@ -3,7 +3,9 @@
   "scripts": {
     "prettier": "npx prettier --write 'contracts/**/*.sol'",
     "compile": "npx hardhat compile",
-    "test": " npx hardhat test ./test/AccountERC6551.ts"
+    "test": " npx hardhat test ./test/AccountERC6551.ts",
+    "deploy:hardhat": "npx hardhat run --network hardhat scripts/deploy.ts",
+    "deploy:mumbai": "npx hardhat run --network mumbai scripts/deploy.ts"
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-chai-matchers": "^1.0.6",
@@ -25,6 +27,7 @@
   },
   "dependencies": {
     "@openzeppelin/contracts": "^4.8.3",
+    "dotenv": "^16.0.3",
     "ts-node": "^10.9.1"
   }
 }

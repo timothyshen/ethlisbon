@@ -4,7 +4,6 @@ pragma solidity ^0.8.0;
 import "@openzeppelin/contracts/utils/Create2.sol";
 
 library AccountLib {
-    error CreationFail();
 
     function getByteCode(
         uint256 chainId_,
