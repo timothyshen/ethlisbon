@@ -14,10 +14,10 @@ export default function Home() {
           </Flex>
 
         </Box> */}
-        <Card title={'DAO Name'} imgSrc='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHZAq08u4YaR0Jsu2CgeptdxC74y-9QEeFYEAb6YHP&s' subtitle={'108k Members'} description={'some description about the DAO, some sentences what its goal and idea'} />
-        <Card title={'DAO Name'} imgSrc='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHZAq08u4YaR0Jsu2CgeptdxC74y-9QEeFYEAb6YHP&s' subtitle={'108k Members'} description={'some description about the DAO, some sentences what its goal and idea'} />
-        <Card title={'DAO Name'} imgSrc='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHZAq08u4YaR0Jsu2CgeptdxC74y-9QEeFYEAb6YHP&s' subtitle={'108k Members'} description={'some description about the DAO, some sentences what its goal and idea'} />
-        <Card title={'DAO Name'} imgSrc='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHZAq08u4YaR0Jsu2CgeptdxC74y-9QEeFYEAb6YHP&s' subtitle={'108k Members'} description={'some description about the DAO, some sentences what its goal and idea'} />
+        <Card title={'DAO Name'} link={'/profile'} imgSrc='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHZAq08u4YaR0Jsu2CgeptdxC74y-9QEeFYEAb6YHP&s' subtitle={'108k Members'} description={'some description about the DAO, some sentences what its goal and idea'} />
+        <Card title={'DAO Name'} link={'/profile'} imgSrc='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHZAq08u4YaR0Jsu2CgeptdxC74y-9QEeFYEAb6YHP&s' subtitle={'108k Members'} description={'some description about the DAO, some sentences what its goal and idea'} />
+        <Card title={'DAO Name'} link={'/profile'} imgSrc='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHZAq08u4YaR0Jsu2CgeptdxC74y-9QEeFYEAb6YHP&s' subtitle={'108k Members'} description={'some description about the DAO, some sentences what its goal and idea'} />
+        <Card title={'DAO Name'} link={'/profile'} imgSrc='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHZAq08u4YaR0Jsu2CgeptdxC74y-9QEeFYEAb6YHP&s' subtitle={'108k Members'} description={'some description about the DAO, some sentences what its goal and idea'} />
 
       </Flex>
     </Box>

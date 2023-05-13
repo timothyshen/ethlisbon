@@ -18,10 +18,9 @@ const MembershipCard: React.FC<CardProps> = ({
     borderWidth="1px"
     borderRadius="12px"
     width={"230px"}
-    overflow={'hidden'}
+    padding={'16px'}
   >
-    <Image src={imgSrc} alt={title} width={'full'} />
-    <Box p="16px">
+    <Image src={imgSrc} alt={title} width={'224px'} />
         <Text color="black" fontSize={"18px"} fontWeight={'semibold'}>
           {title}
         </Text>
@@ -39,16 +38,16 @@ const MembershipCard: React.FC<CardProps> = ({
         </Box>
 
         <Box backgroundColor={'#F3F4F6'} mt={'16px'} borderRadius={'10px'}>
-          <Flex>
+          <Flex justifyContent={'space-between'} alignItems={'center'} padding={'12px 16px'}>
             <Box>
-              <Text>PRICE</Text>
-              <Text>10 ETH</Text>
+              <Text fontSize={'9px'} fontWeight={'semibold'} color={'#9CA3AF'}>PRICE</Text>
+              <Text fontSize={"16px"} fontWeight={'semibold'}>10 ETH</Text>
             </Box>
-            <Button>Buy now</Button>
+            <Button backgroundColor={'black'} color={'white'} _hover={{backgroundColor:'black',opacity:'75%'}}>Join</Button>
           </Flex>
 
         </Box>
-    </Box>
+
   </Box>
 );
 

@@ -1,10 +1,11 @@
-import { Box, Image, Badge, Text, Button, Flex } from "@chakra-ui/react";
+import { Box, Image, Badge, Text, Button, Flex, Link } from "@chakra-ui/react";
 
 type CardProps = {
   imgSrc: string;
   title: string;
   subtitle: string;
   description: string;
+  link:string;
 };
 
 const Card: React.FC<CardProps> = ({
@@ -12,6 +13,7 @@ const Card: React.FC<CardProps> = ({
   title,
   subtitle,
   description,
+  link
 }) => (
   <Box
     maxW="sm"
@@ -39,15 +41,15 @@ const Card: React.FC<CardProps> = ({
           {description}
         </Box>
 
-        <Button
-            mt={'24px'}
+        <Link href={link}><Button
+        mt={'24px'}
           padding={"10px 44px"}
           backgroundColor={"white"}
           border={"1px solid #E5E7EB"}
           borderRadius={"30px"}
         >
           Join
-        </Button>
+        </Button></Link>
       </Flex>
     </Box>
   </Box>
