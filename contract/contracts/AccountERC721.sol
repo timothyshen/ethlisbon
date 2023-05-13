@@ -38,16 +38,16 @@ contract UpstarNFT is
         _unpause();
     }
 
-    function safeMint(address to, string memory uri) public onlyOwner returns (uint256){
+    function mint(string memory uri) external returns (uint256) {
         uint256 tokenId = _tokenIdCounter.current();
         _tokenIdCounter.increment();
-        _safeMint(to, tokenId);
+        _safeMint(msg.sender, tokenId);
         _setTokenURI(tokenId, uri);
         return tokenId;
     }
 
-    function tokenID(address to) public view returns (uint256) {
-        
+    function tokenID() public view returns (uint256) {
+        return _tokenIdCounter.current();
     }
 
     function _beforeTokenTransfer(

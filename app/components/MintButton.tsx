@@ -1,19 +1,39 @@
 import React from "react";
-import {Button} from "@chakra-ui/react";
-import { AccountERC721Function } from "../utils/";
+import { Button } from "@chakra-ui/react";
+import { ERC721Mint } from "../utils/ERC721contract";
+import { AccountERC6551Register } from "../utils/ERC6551RegistryContract";
 
 const MintButton: React.FC = () => {
-  const { mintAccountNFT } = AccountERC721Function();
+  const { mintNFT, mintSuccess, tokenIDSuccess, balance, mintLoading } =
+    ERC721Mint();
+  const { RegisterAccount, registerData, createSuccess, createError } =
+    AccountERC6551Register();
 
+  const mintWallet = async () => {
+    await mintNFT();
+    if (!mintLoading) {
+      await RegisterAccount(balance?.toString());
+    }
+  };
   return (
-    
+    <>
       <Button
+        mt={"20px"}
+        backgroundColor={"black"}
+        color={"white"}
+        _hover={{ backgroundColor: "black", opacity: "75%" }}
+        width={"full"}
+        borderRadius={"30px"}
         onClick={() => {
-          mintAccountNFT();
+          mintWallet();
         }}
+        disabled={!mintNFT || mintLoading}
       >
-        Mint Tokens
+        Join Membership
       </Button>
+      {createSuccess && <p>Account Created</p>}
+      {createError && <p>Account Creation Failed</p>}
+    </>
   );
 };
 

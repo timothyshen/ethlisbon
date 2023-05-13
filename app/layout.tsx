@@ -1,9 +1,19 @@
 "use client";
 import "./globals.css";
 import Header from "./header";
-import { getDefaultWallets, lightTheme, RainbowKitProvider } from "@rainbow-me/rainbowkit";
+import {
+  getDefaultWallets,
+  lightTheme,
+  RainbowKitProvider,
+} from "@rainbow-me/rainbowkit";
 import { configureChains, createConfig, WagmiConfig } from "wagmi";
-import { mainnet, polygon, optimism, arbitrum } from "wagmi/chains";
+import {
+  mainnet,
+  polygon,
+  optimism,
+  arbitrum,
+  polygonMumbai,
+} from "wagmi/chains";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
 
@@ -12,7 +22,7 @@ import { Providers } from "./providers";
 import "@rainbow-me/rainbowkit/styles.css";
 
 const { chains, publicClient } = configureChains(
-  [mainnet, polygon, optimism],
+  [mainnet, polygon, optimism, polygonMumbai],
   [
     // alchemyProvider({ apiKey: process.env.ALCHEMY_ID }),
     publicProvider(),
@@ -44,9 +54,9 @@ export default function RootLayout({
             <RainbowKitProvider
               chains={chains}
               theme={lightTheme({
-                accentColor: 'black',
-                accentColorForeground: 'white',
-                borderRadius: 'medium',
+                accentColor: "black",
+                accentColorForeground: "white",
+                borderRadius: "medium",
               })}
             >
               <Header />

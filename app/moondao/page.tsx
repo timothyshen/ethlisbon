@@ -17,7 +17,11 @@ export default function Home() {
                 settlement on the Moon by 2030 to act as a launch point for
                 humanity to explore the cosmos."
         />
-        <Flex justifyContent={"space-between"} flexWrap={"wrap"} rowGap={'30px'}>
+        <Flex
+          justifyContent={"space-between"}
+          flexWrap={"wrap"}
+          rowGap={"30px"}
+        >
           <MembershipCard
             title={"Gold Membership"}
             imgSrc="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHZAq08u4YaR0Jsu2CgeptdxC74y-9QEeFYEAb6YHP&s"
@@ -25,7 +29,7 @@ export default function Home() {
             description={
               "MoonDAO`s mission is to create a self-sustaining, self-governing "
             }
-            link={'/moondao/membership'}
+            link={"/moondao/membership"}
           />
           <MembershipCard
             title={"Gold Membership"}
@@ -34,7 +38,7 @@ export default function Home() {
             description={
               "MoonDAO`s mission is to create a self-sustaining, self-governing "
             }
-            link={'/moondao/membership'}
+            link={"/moondao/membership"}
           />
           <MembershipCard
             title={"Gold Membership"}
@@ -43,7 +47,7 @@ export default function Home() {
             description={
               "MoonDAO`s mission is to create a self-sustaining, self-governing "
             }
-            link={'/moondao/membership'}
+            link={"/moondao/membership"}
           />
           <MembershipCard
             title={"Gold Membership"}
@@ -52,7 +56,7 @@ export default function Home() {
             description={
               "MoonDAO`s mission is to create a self-sustaining, self-governing "
             }
-            link={'/moondao/membership'}
+            link={"/moondao/membership"}
           />
         </Flex>
       </Flex>
