@@ -1,10 +1,12 @@
-import { Box, Image, Badge, Text, Button, Flex } from "@chakra-ui/react";
+'use client'
+import { Box, Image, Badge, Text, Button, Flex, Link } from "@chakra-ui/react";
 
 type CardProps = {
   imgSrc: string;
   title: string;
   subtitle: string;
   description: string;
+  link:string
 };
 
 const MembershipCard: React.FC<CardProps> = ({
@@ -12,6 +14,7 @@ const MembershipCard: React.FC<CardProps> = ({
   title,
   subtitle,
   description,
+  link
 }) => (
   <Box
     maxW="sm"
@@ -43,7 +46,7 @@ const MembershipCard: React.FC<CardProps> = ({
               <Text fontSize={'9px'} fontWeight={'semibold'} color={'#9CA3AF'}>PRICE</Text>
               <Text fontSize={"16px"} fontWeight={'semibold'}>10 ETH</Text>
             </Box>
-            <Button backgroundColor={'black'} color={'white'} _hover={{backgroundColor:'black',opacity:'75%'}}>Join</Button>
+            <Link href={link}><Button backgroundColor={'black'} color={'white'} _hover={{backgroundColor:'black',opacity:'75%'}}>Join</Button></Link>
           </Flex>
 
         </Box>
