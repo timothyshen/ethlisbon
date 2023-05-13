@@ -1,5 +1,6 @@
 "use client";
 import { Box, Text, Button, Flex } from "@chakra-ui/react";
+import MintButton from "@/app/components/MintButton";
 
 type CardProps = {
   title: string;
@@ -29,8 +30,8 @@ const MembershipWidget: React.FC<CardProps> = ({
       {description}
     </Text>
     {/* Smart contract checking and deciding widget to display */}
-    {/* <Join /> */}
-    <Rewnewal />
+    <Join />
+    {/* <Rewnewal /> */}
   </Box>
 );
 
@@ -68,16 +69,7 @@ const Join: React.FC = () => {
           </Text>
         </Box>
       </Flex>
-      <Button
-        mt={"20px"}
-        backgroundColor={"black"}
-        color={"white"}
-        _hover={{ backgroundColor: "black", opacity: "75%" }}
-        width={"full"}
-        borderRadius={"30px"}
-      >
-        Join
-      </Button>
+      <MintButton />
     </Box>
   );
 };
@@ -94,15 +86,22 @@ const Rewnewal: React.FC = () => {
         <Flex>
           <Text>Image</Text>
           <Box>
-            <Text fontSize={'14px'} fontWeight={'semibold'}>You are part of Lens DAO</Text>
-            <Text fontSize={'12px'} mt={'14px'} color={'#6B7280'}>You have 12 more months of fun with this DAO.</Text>
+            <Text fontSize={"14px"} fontWeight={"semibold"}>
+              You are part of Lens DAO
+            </Text>
+            <Text fontSize={"12px"} mt={"14px"} color={"#6B7280"}>
+              You have 12 more months of fun with this DAO.
+            </Text>
           </Box>
         </Flex>
-        <Text fontSize={'12px'}>
-          Next payment <Text as={"span"} fontSize={'14px'}>13 JUNE 2023</Text>
+        <Text fontSize={"12px"}>
+          Next payment{" "}
+          <Text as={"span"} fontSize={"14px"}>
+            13 JUNE 2023
+          </Text>
         </Text>
       </Box>
-      <Flex fontSize={"11px"} justifyContent={"space-between"} mt={'28px'}>
+      <Flex fontSize={"11px"} justifyContent={"space-between"} mt={"28px"}>
         <Box>
           <Text
             fontWeight={"semibold"}
