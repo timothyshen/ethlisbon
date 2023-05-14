@@ -27,7 +27,7 @@ export function ERC721Mint() {
   return { mintNFT, mintSuccess, tokenIDSuccess, balance, mintLoading };
 }
 
-export function ownerOfToken(tokenId: number) {
+export function OwnerOfToken(tokenId: number) {
   const { data: owner, isSuccess: ownerSuccess } = useContractRead({
     address: AccountERC721,
     abi: AccountERC721abi,
