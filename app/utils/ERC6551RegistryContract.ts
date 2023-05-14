@@ -2,7 +2,8 @@ import { useContractWrite, useNetwork } from "wagmi";
 import { AccountERC6551Registryabi } from "./contracts/AccountERC6551Registry";
 
 export function AccountERC6551Register() {
-  let AccountERC6551Registry: any, AccountERC721: any;
+  let AccountERC6551Registry;
+  let AccountERC721;
   // let AccountTokenVault;
   const { chain } = useNetwork();
 
@@ -20,7 +21,6 @@ export function AccountERC6551Register() {
     AccountERC721 = require("./CONTRACT_CONSTANT_SCROLL").AccountERC721;
   }
   const {
-    data: registerData,
     write: registerAccount,
     isSuccess: createSuccess,
     isError: createError,
@@ -31,14 +31,14 @@ export function AccountERC6551Register() {
   });
 
   const RegisterAccount: any = async (tokenId: number) => {
-    await registerAccount({
+    const { data } = await registerAccount({
       args: [AccountERC721, tokenId],
     });
-
+    console.log(data);
     // Wait for the transaction to be mined
   };
 
-  return { RegisterAccount, registerData, createSuccess, createError };
+  return { RegisterAccount, createSuccess, createError };
 }
 
 export function AccountERC6551Account() {
@@ -60,7 +60,6 @@ export function AccountERC6551Account() {
     AccountERC721 = require("./CONTRACT_CONSTANT_SCROLL").AccountERC721;
   }
   const {
-    data: registerData,
     write: registerAccount,
     isSuccess: createSuccess,
     isError: createError,
