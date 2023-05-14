@@ -1,6 +1,8 @@
+//@ts-nocheck
 import { HardhatUserConfig } from "hardhat/config";
 import "@nomicfoundation/hardhat-toolbox";
 require("dotenv").config({ path: ".env" });
+
 
 const ALCHEMY_API_MUMBAI = process.env.ALCHEMY_API_MUMBAI;
 const PRIVATE_KEY = process.env.PRIVATE_KEY;
