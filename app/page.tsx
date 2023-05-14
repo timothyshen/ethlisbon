@@ -2,7 +2,6 @@
 
 import { Box, Flex, Text } from "@chakra-ui/react";
 import Card from "./components/Card";
-import MintButton from "./components/MintButton";
 
 export default function Home() {
   return (
