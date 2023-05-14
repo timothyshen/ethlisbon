@@ -5,26 +5,10 @@ import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/security/Pausable.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-contract Upstar is ERC20, Pausable, Ownable {
+contract Upstar is ERC20, Ownable {
     constructor() ERC20("Upstar", "UP") {}
 
-    function pause() public onlyOwner {
-        _pause();
-    }
-
-    function unpause() public onlyOwner {
-        _unpause();
-    }
-
-    function mint(address to, uint256 amount) public onlyOwner {
+    function mint(address to, uint256 amount) external {
         _mint(to, amount);
-    }
-
-    function _beforeTokenTransfer(
-        address from,
-        address to,
-        uint256 amount
-    ) internal override whenNotPaused {
-        super._beforeTokenTransfer(from, to, amount);
     }
 }

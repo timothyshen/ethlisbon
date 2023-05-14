@@ -4,12 +4,9 @@ pragma solidity ^0.8.0;
 
 interface IAccountRegistryERC6551 {
     event AccountCreated(
-        address account,
-        address implementation,
-        uint256 chainId,
-        address tokenContract,
-        uint256 tokenId,
-        bytes32 salt
+        address indexed account,
+        address indexed accountERC6551,
+        uint256 indexed tokenId
     );
 
     function createAccount(

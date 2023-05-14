@@ -8,10 +8,10 @@ import "@openzeppelin/contracts/interfaces/IERC1271.sol";
 import "@openzeppelin/contracts/utils/cryptography/SignatureChecker.sol";
 
 import "./interface/IAccountERC6551.sol";
-import "./lib/AccountLib.sol";
+import "./lib/MinimalProxyStore.sol";
 import "./MinimalReceiver.sol";
 
-import "hardhat/console.sol";
+// import "hardhat/console.sol";
 
 contract AccountERC6551 is IERC165, IERC1271, IAccountERC6551, MinimalReceiver {
     error NotAuthorized();
@@ -42,9 +42,20 @@ contract AccountERC6551 is IERC165, IERC1271, IAccountERC6551, MinimalReceiver {
         view
         returns (address tokenCollection, uint256 tokenId)
     {
-        (, tokenCollection, tokenId) = AccountLib.token();
-        return (tokenCollection, tokenId);
+        (, tokenCollection, tokenId) = context();
     }
+
+    // function lock(uint256 _unlockTimestamp) external onlyUnlocked {
+    //     if (_unlockTimestamp > block.timestamp + 365 days)
+    //         revert ExceedsMaxLockTime();
+
+    //     address _owner = owner();
+    //     if (_owner != msg.sender) revert NotAuthorized();
+
+    //     unlockTimestamp = _unlockTimestamp;
+
+    //     emit LockUpdated(_unlockTimestamp);
+    // }
 
     //++++++++++++++++++++++++++++Support Function+++++++++++++++++++++++++++++++++++++++++++++
 
@@ -88,5 +99,12 @@ contract AccountERC6551 is IERC165, IERC1271, IAccountERC6551, MinimalReceiver {
                 revert(add(result, 32), mload(result))
             }
         }
+    }
+
+    function context() internal view returns (uint256, address, uint256) {
+        bytes memory rawContext = MinimalProxyStore.getContext(address(this));
+        if (rawContext.length == 0) return (0, address(0), 0);
+
+        return abi.decode(rawContext, (uint256, address, uint256));
     }
 }
