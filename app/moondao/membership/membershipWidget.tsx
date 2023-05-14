@@ -1,6 +1,9 @@
 "use client";
-import { Box, Text, Button, Flex } from "@chakra-ui/react";
+import { Box, Text, Button, Flex, Skeleton, Image } from "@chakra-ui/react";
 import MintButton from "@/app/components/MintButton";
+import { useAccount, useContractRead } from "wagmi";
+import { erc721ABI } from 'wagmi'
+import { useState } from "react";
 
 type CardProps = {
   title: string;
@@ -8,17 +11,41 @@ type CardProps = {
   description: string;
 };
 
+
 const MembershipWidget: React.FC<CardProps> = ({
   title,
   subtitle,
   description,
-}) => (
+}) => {
+
+  const { address, isConnecting, isDisconnected } = useAccount()
+  const [mintedNFT, setMintedNFT] = useState(false)
+  let isMember = false
+
+  //Check wallet for NFT
+  const { data, isError, isLoading } = useContractRead({
+    address: '0x877CDC6441A7332237994Ef3d43C3EdDd35Dfc12',
+    abi: erc721ABI,
+    functionName: 'balanceOf',
+    args:[address as `0x${string}`]
+  })
+
+  if(!isLoading) {
+    if(parseInt(data?.toString() || '0') > 0 || mintedNFT) {
+      isMember = true
+    }
+  }
+
+
+  return (
   <Box
     border={"1px solid #F3F4F6"}
     width={"400px"}
     padding={"20px"}
     height={"fit-content"}
     borderRadius={"10px"}
+    backgroundColor={'white'}
+    borderColor={'#E5E7EB'}
   >
     <Text fontSize={"32px"} fontWeight={"semibold"}>
       {title}
@@ -30,12 +57,18 @@ const MembershipWidget: React.FC<CardProps> = ({
       {description}
     </Text>
     {/* Smart contract checking and deciding widget to display */}
-    <Join />
-    {/* <Rewnewal /> */}
+    { isMember ?  <Rewnewal /> : <Join setMintedNFT={setMintedNFT}/> }
   </Box>
-);
+)};
 
-const Join: React.FC = () => {
+type JoinProps = {
+  setMintedNFT: any;
+};
+
+
+const Join: React.FC<JoinProps> = ({
+  setMintedNFT
+}) => {
   return (
     <Box
       backgroundColor={"#F3F4F6"}
@@ -69,7 +102,7 @@ const Join: React.FC = () => {
           </Text>
         </Box>
       </Flex>
-      <MintButton />
+      <MintButton setMintedNFT={setMintedNFT} />
     </Box>
   );
 };
@@ -84,24 +117,24 @@ const Rewnewal: React.FC = () => {
     >
       <Box backgroundColor={"white"} borderRadius={"10px"} padding={"12px"}>
         <Flex>
-          <Text>Image</Text>
-          <Box>
+          <Image src={'/images/success.png'} alt={'success'} height={'60px'} />
+          <Box ml={'20px'} mb={'15px'} >
             <Text fontSize={"14px"} fontWeight={"semibold"}>
               You are part of Lens DAO
             </Text>
-            <Text fontSize={"12px"} mt={"14px"} color={"#6B7280"}>
+            <Text fontSize={"12px"} mt={"5px"} color={"#6B7280"}>
               You have 12 more months of fun with this DAO.
             </Text>
           </Box>
         </Flex>
-        <Text fontSize={"12px"}>
+        <Text fontSize={"12px"} color={'#8466B2'} fontWeight={'medium'}>
           Next payment{" "}
-          <Text as={"span"} fontSize={"14px"}>
+          <Text ml={'3px'} as={"span"} fontSize={"14px"} color={'#4C1D95'}>
             13 JUNE 2023
           </Text>
         </Text>
       </Box>
-      <Flex fontSize={"11px"} justifyContent={"space-between"} mt={"28px"}>
+      <Flex fontSize={"11px"} justifyContent={"space-between"} mt={"20px"}>
         <Box>
           <Text
             fontWeight={"semibold"}

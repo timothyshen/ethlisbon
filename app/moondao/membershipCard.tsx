@@ -22,12 +22,14 @@ const MembershipCard: React.FC<CardProps> = ({
     borderRadius="12px"
     width={"230px"}
     padding={'16px'}
+    backgroundColor={'white'}
+    borderColor={'#E5E7EB'}
   >
     <Image src={imgSrc} alt={title} width={'224px'} />
         <Text color="black" fontSize={"18px"} fontWeight={'semibold'}>
           {title}
         </Text>
-        <Text fontSize={'12px'} color={'#4C1D95'}>{subtitle}</Text>
+        <Text fontSize={'12px'} fontWeight={'semibold'} color={'#4C1D95'}>{subtitle}</Text>
 
         <Box
           fontSize={"12px"}

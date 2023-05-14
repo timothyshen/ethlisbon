@@ -2,8 +2,11 @@ import React from "react";
 import { Button } from "@chakra-ui/react";
 import { ERC721Mint } from "../utils/ERC721contract";
 import { AccountERC6551Register } from "../utils/ERC6551RegistryContract";
+type JoinProps = {
+  setMintedNFT: any;
+};
 
-const MintButton: React.FC = () => {
+const MintButton: React.FC<JoinProps> = ({ setMintedNFT }) => {
   const { mintNFT, mintSuccess, tokenIDSuccess, balance, mintLoading } =
     ERC721Mint();
   const { RegisterAccount, registerData, createSuccess, createError } =
@@ -15,6 +18,10 @@ const MintButton: React.FC = () => {
       await RegisterAccount(balance?.toString());
     }
   };
+
+  if(createSuccess) {
+    setMintedNFT(true)
+  }
   console.log("registerData", registerData);
   return (
     <>

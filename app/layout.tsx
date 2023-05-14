@@ -1,5 +1,4 @@
 "use client";
-import "./globals.css";
 import Header from "./header";
 import {
   getDefaultWallets,
@@ -14,7 +13,6 @@ import {
   arbitrum,
   polygonMumbai,
 } from "wagmi/chains";
-import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
 
 import { Providers } from "./providers";
@@ -22,7 +20,7 @@ import { Providers } from "./providers";
 import "@rainbow-me/rainbowkit/styles.css";
 
 const { chains, publicClient } = configureChains(
-  [mainnet, polygon, optimism, polygonMumbai],
+  [polygonMumbai, mainnet, polygon, optimism],
   [
     // alchemyProvider({ apiKey: process.env.ALCHEMY_ID }),
     publicProvider(),

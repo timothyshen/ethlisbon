@@ -1,8 +1,8 @@
-import { ethers } from "hardhat";
+import hre from "hardhat";
 
 async function main() {
   // Deploy dummy ERC721
-  const DummyERC721 = await ethers.getContractFactory("MockERC721");
+  const DummyERC721 = await hre.ethers.getContractFactory("MockERC721");
   const dummyERC721 = await DummyERC721.deploy();
   await dummyERC721.deployed();
   console.log("Summy deployed to:", dummyERC721.address);
@@ -11,7 +11,7 @@ async function main() {
   // const mockERC721 = await MockERC721.deploy("https://ipfs.io/ipfs/");
   // await mockERC721.deployed();
   // console.log("UpstarNFT deployed to:", mockERC721.address);
-  
+
   // Deploy AccountERC6551
   // const AccountERC6551 = await ethers.getContractFactory("AccountERC6551");
   // const accountERC6551 = await AccountERC6551.deploy();

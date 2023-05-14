@@ -23,6 +23,7 @@ const ProfileCard: React.FC<CardProps> = ({
     width={"280px"}
     padding={"16px"}
     height={"fit-content"}
+    borderColor={'#E5E7EB'}
   >
     <Text color="black" fontSize={"18px"} fontWeight={"semibold"}>
       {title}
