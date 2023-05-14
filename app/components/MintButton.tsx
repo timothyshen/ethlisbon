@@ -6,20 +6,7 @@ type JoinProps = {
   setMintedNFT: any;
 };
 
-interface MintButtonProps {
-  setBalance: React.Dispatch<React.SetStateAction<number | null>>;
-  setCreateSuccess: React.Dispatch<React.SetStateAction<boolean | null>>;
-}
-
-interface MintButtonProps {
-  setBalance: React.Dispatch<React.SetStateAction<number | null>>;
-  setCreateSuccess: React.Dispatch<React.SetStateAction<boolean | null>>;
-}
-
-const MintButton: React.FC<MintButtonProps> = ({
-  setBalance,
-  setCreateSuccess,
-}) => {
+const MintButton: React.FC<JoinProps> = ({ setMintedNFT }) => {
   const { mintNFT, mintSuccess, tokenIDSuccess, balance, mintLoading } =
     ERC721Mint();
   const { RegisterAccount, registerData, createSuccess, createError } =
@@ -29,15 +16,12 @@ const MintButton: React.FC<MintButtonProps> = ({
     await mintNFT();
     if (!mintLoading) {
       await RegisterAccount(balance?.toString() || "0"); // default to "0" if balance is undefined
-      setBalance(balance !== undefined ? Number(balance) : null);
-      setCreateSuccess(createSuccess || false); // default to false if createSuccess is undefined
     }
   };
 
-  if(createSuccess) {
-    setMintedNFT(true)
+  if (createSuccess) {
+    setMintedNFT(true);
   }
-  console.log("registerData", registerData);
   return (
     <>
       <Button

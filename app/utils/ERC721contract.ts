@@ -1,8 +1,20 @@
-import { AccountERC721 } from "./CONTRACT_CONSTANT";
 import { useContractRead, useContractWrite } from "wagmi";
 import { AccountERC721abi } from "./contracts/AccountERC721";
+import { useNetwork } from "wagmi";
 
 export function ERC721Mint() {
+  let AccountERC721;
+  // let AccountTokenVault;
+  const { chain } = useNetwork();
+  console.log(chain?.name);
+
+  if (chain?.name === "Polygon Mumbai") {
+    AccountERC721 = require("./CONTRACT_CONSTANT_MUMBAI").AccountERC721;
+  } else if (chain?.name === "Optimism Goerli") {
+    AccountERC721 = require("./CONTRACT_CONSTANT_OP").AccountERC721;
+  } else if (chain?.name === "Scroll Testnet") {
+    AccountERC721 = require("./CONTRACT_CONSTANT_SCROLL").AccountERC721;
+  }
   const {
     write: mintNFT,
     isSuccess: mintSuccess,
@@ -28,6 +40,18 @@ export function ERC721Mint() {
 }
 
 export function OwnerOfToken(tokenId: number) {
+  let AccountERC721;
+  // let AccountTokenVault;
+  const { chain } = useNetwork();
+
+  if (chain?.name === "Polygon Mumbai") {
+    AccountERC721 = require("./CONTRACT_CONSTANT_MUMBAI").AccountERC721;
+  } else if (chain?.name === "Optimism Goerli") {
+    AccountERC721 = require("./CONTRACT_CONSTANT_OP").AccountERC721;
+  } else if (chain?.name === "Scroll Testnet") {
+    AccountERC721 = require("./CONTRACT_CONSTANT_SCROLL").AccountERC721;
+  }
+
   const { data: owner, isSuccess: ownerSuccess } = useContractRead({
     address: AccountERC721,
     abi: AccountERC721abi,

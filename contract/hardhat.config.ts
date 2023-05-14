@@ -3,6 +3,8 @@ import "@nomicfoundation/hardhat-toolbox";
 require("dotenv").config({ path: ".env" });
 
 const ALCHEMY_API_MUMBAI = process.env.ALCHEMY_API_MUMBAI;
+const ALCHEMY_API_OPTIMISM = process.env.ALCHEMY_API_OPTIMISM;
+const ALCHEMY_API_SCROLL = process.env.ALCHEMY_API_SCROLL;
 const PRIVATE_KEY = process.env.PRIVATE_KEY;
 
 const config: HardhatUserConfig = {
@@ -29,11 +31,11 @@ const config: HardhatUserConfig = {
       accounts: [`${PRIVATE_KEY}`],
     },
     optimism: {
-      url: "https://optimism-mainnet.infura.io/v3/6b1f0b1b0b0e4b6e9b0b0e4b6e9b0b0e",
+      url: ALCHEMY_API_OPTIMISM,
       accounts: [`${PRIVATE_KEY}`],
     },
     scrollAlpha: {
-      url: "https://alpha-rpc.scroll.io/l2" || "",
+      url: ALCHEMY_API_SCROLL || "",
       accounts: [`${PRIVATE_KEY}`],
     },
   },

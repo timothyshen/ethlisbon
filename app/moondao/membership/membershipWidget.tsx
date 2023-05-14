@@ -1,10 +1,10 @@
 "use client";
-import { Box, Text, Button, Flex, Skeleton, Image } from "@chakra-ui/react";
-import MintButton from "@/app/components/MintButton";
-import { useAccount, useContractRead } from "wagmi";
-import { erc721ABI } from "wagmi";
-import { useState } from "react";
-import BasicPopOver from "@/app/components/PopOver";
+import { Box, Text, Button, Flex, Image } from "@chakra-ui/react";
+import MintButton from "../../components/MintButton";
+import { erc721ABI, useAccount, useContractRead, useNetwork } from "wagmi";
+import { useState, useEffect } from "react";
+import React from "react";
+import BasicPopOver from "../../components/PopOver";
 
 type CardProps = {
   title: string;
@@ -12,32 +12,38 @@ type CardProps = {
   description: string;
 };
 
-type MintButtonProps = {
-  setBalance: React.Dispatch<React.SetStateAction<number | null>>;
-  setCreateSuccess: React.Dispatch<React.SetStateAction<boolean | null>>;
-};
-
-type RenewalProps = {
-  balance: number | undefined | null;
-  createSuccess: boolean | null;
-};
-
 const MembershipWidget: React.FC<CardProps> = ({
   title,
   subtitle,
   description,
 }) => {
-  const { address, isConnecting, isDisconnected } = useAccount();
+  const { address } = useAccount();
+  const { chain } = useNetwork();
   const [mintedNFT, setMintedNFT] = useState(false);
+  const [tokenId, setTokenId] = useState<number | null>(null);
   let isMember = false;
+  let AccountERC721;
 
+  if (chain?.name === "Polygon Mumbai") {
+    AccountERC721 =
+      require("../../utils/CONTRACT_CONSTANT_MUMBAI").AccountERC721;
+  } else if (chain?.name === "Optimism Goerli") {
+    AccountERC721 = require("../../utils/CONTRACT_CONSTANT_OP").AccountERC721;
+  } else if (chain?.name === "Scroll Testnet") {
+    AccountERC721 =
+      require("../../utils/CONTRACT_CONSTANT_SCROLL").AccountERC721;
+  }
   //Check wallet for NFT
-  const { data, isError, isLoading } = useContractRead({
-    address: "0x877CDC6441A7332237994Ef3d43C3EdDd35Dfc12",
+  const { data, isLoading } = useContractRead({
+    address: AccountERC721,
     abi: erc721ABI,
     functionName: "balanceOf",
     args: [address as `0x${string}`],
   });
+
+  // useEffect(() => {
+  //   setTokenId(parseInt(data?.toString() || "0"));
+  // }, [data]);
 
   if (!isLoading) {
     if (parseInt(data?.toString() || "0") > 0 || mintedNFT) {
@@ -65,7 +71,11 @@ const MembershipWidget: React.FC<CardProps> = ({
         {description}
       </Text>
       {/* Smart contract checking and deciding widget to display */}
-      {isMember ? <Rewnewal /> : <Join setMintedNFT={setMintedNFT} />}
+      {isMember ? (
+        <Rewnewal TokenID={tokenId} />
+      ) : (
+        <Join setMintedNFT={setMintedNFT} />
+      )}
     </Box>
   );
 };
@@ -75,37 +85,6 @@ type JoinProps = {
 };
 
 const Join: React.FC<JoinProps> = ({ setMintedNFT }) => {
-  const [balance, setBalance] = useState<number | undefined>(null);
-  const [createSuccess, setCreateSuccess] = useState<boolean | null>(null);
-
-  return (
-    <Box
-      border={"1px solid #F3F4F6"}
-      width={"400px"}
-      padding={"20px"}
-      height={"fit-content"}
-      borderRadius={"10px"}
-    >
-      <Text fontSize={"32px"} fontWeight={"semibold"}>
-        {title}
-      </Text>
-      <Text fontSize={"12px"} color={"#4C1D95"}>
-        {subtitle}
-      </Text>
-      <Text mt={"20px"} fontSize={"12px"}>
-        {description}
-      </Text>
-      {/* Smart contract checking and deciding widget to display */}
-      <Join setBalance={setBalance} setCreateSuccess={setCreateSuccess} />
-      {/* Uncomment this line when you want to use the Renewal component */}
-      {createSuccess && (
-        <Renewal balance={balance} createSuccess={createSuccess} />
-      )}
-    </Box>
-  );
-};
-
-const Join: React.FC<MintButtonProps> = ({ setBalance, setCreateSuccess }) => {
   return (
     <Box
       backgroundColor={"#F3F4F6"}
@@ -139,12 +118,18 @@ const Join: React.FC<MintButtonProps> = ({ setBalance, setCreateSuccess }) => {
           </Text>
         </Box>
       </Flex>
-      <MintButton setBalance={setBalance} setCreateSuccess={setCreateSuccess} />
+      <MintButton setMintedNFT={setMintedNFT} />
     </Box>
   );
 };
 
-const Renewal: React.FC<RenewalProps> = ({ balance, createSuccess }) => {
+type RenewalProps = {
+  TokenID: number | null;
+};
+
+const Rewnewal: React.FC<RenewalProps> = ({ TokenID }) => {
+  const [isShow, setIsShow] = useState(false);
+
   return (
     <Box
       backgroundColor={"#F3F4F6"}
@@ -197,16 +182,7 @@ const Renewal: React.FC<RenewalProps> = ({ balance, createSuccess }) => {
           </Text>
         </Box>
       </Flex>
-      <Button
-        mt={"20px"}
-        backgroundColor={"black"}
-        color={"white"}
-        _hover={{ backgroundColor: "black", opacity: "75%" }}
-        width={"full"}
-        borderRadius={"30px"}
-      >
-        Renewal Subscription
-      </Button>
+      <BasicPopOver tokenID={1} />
     </Box>
   );
 };

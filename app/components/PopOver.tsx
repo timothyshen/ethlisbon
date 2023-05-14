@@ -12,36 +12,42 @@ import {
 import { FormControl, FormLabel, Input } from "@chakra-ui/react";
 import { AccountERC6551Account } from "../utils/ERC6551RegistryContract";
 import { TokenVaultInitailisation } from "../utils/TokenVault";
-
+import { useNetwork } from "wagmi";
 interface BasicPopOverProps {
-  tokenID: number;
+  tokenID: number | null;
 }
 
 const BasicPopOver: React.FC<BasicPopOverProps> = ({ tokenID }) => {
   const { RegisterAccount } = AccountERC6551Account();
+  const { chain, chains } = useNetwork();
+
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const [address, setAddress] = useState("");
   const [amount, setAmount] = useState(0);
   const [dayNum, setDayNum] = useState(0);
 
-  useEffect(() => {
-    console.log("tokenID", tokenID);
-    const { data } = RegisterAccount(tokenID);
-    setAddress(data.address);
-  }, [tokenID, RegisterAccount]);
-
   return (
     <>
-      <Button onClick={onOpen}>Open Modal</Button>
+      <Button
+        onClick={onOpen}
+        mt={"20px"}
+        backgroundColor={"black"}
+        color={"white"}
+        _hover={{ backgroundColor: "black", opacity: "75%" }}
+        width={"full"}
+        borderRadius={"30px"}
+      >
+        Renewal Subscription
+      </Button>
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Modal Title</ModalHeader>
+          <ModalHeader>Set Vault</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <FormControl mt={4}>
+            <FormControl mt={3}>
               <FormLabel>Amount</FormLabel>
               <Input
                 placeholder="Amount"
@@ -62,9 +68,12 @@ const BasicPopOver: React.FC<BasicPopOverProps> = ({ tokenID }) => {
 
           <ModalFooter>
             <Button
-              colorScheme="black"
+              colorScheme="blue"
               mr={3}
-              onClick={() => TokenVaultInitailisation(address, amount, dayNum)}
+              onClick={() => {
+                console.log("amount", amount);
+  
+              }}
             >
               Set Vault
             </Button>

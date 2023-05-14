@@ -6,8 +6,8 @@
     "test": " npx hardhat test ./test/AccountERC6551.ts",
     "deploy:hardhat": "npx hardhat run --network hardhat scripts/deploy.ts",
     "deploy:mumbai": "npx hardhat run --network mumbai scripts/deploy.ts",
-    "deploy:optimistic": "npx hardhat run --network optimistic scripts/deploy.ts"
-
+    "deploy:optimism": "npx hardhat run --network optimism scripts/deploy.ts",
+    "deploy:scrollAlpha": "npx hardhat run --network scrollAlpha scripts/deploy.ts"
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-chai-matchers": "^1.0.6",

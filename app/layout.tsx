@@ -6,13 +6,7 @@ import {
   RainbowKitProvider,
 } from "@rainbow-me/rainbowkit";
 import { configureChains, createConfig, WagmiConfig } from "wagmi";
-import {
-  mainnet,
-  polygon,
-  optimism,
-  arbitrum,
-  polygonMumbai,
-} from "wagmi/chains";
+import { polygonMumbai, optimismGoerli, scrollTestnet } from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
 
 import { Providers } from "./providers";
@@ -20,7 +14,7 @@ import { Providers } from "./providers";
 import "@rainbow-me/rainbowkit/styles.css";
 
 const { chains, publicClient } = configureChains(
-  [polygonMumbai, mainnet, polygon, optimism],
+  [polygonMumbai, optimismGoerli, scrollTestnet],
   [
     // alchemyProvider({ apiKey: process.env.ALCHEMY_ID }),
     publicProvider(),

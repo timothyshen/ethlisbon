@@ -1,12 +1,22 @@
-import { AccountERC6551 } from "./CONTRACT_CONSTANT";
 import { AccountERC6551abi } from "./contracts/AccountERC6551";
 import {
   useContractRead,
   useContractWrite,
   useWaitForTransaction,
+  useNetwork,
 } from "wagmi";
 
 export async function MakeTransfer(to: string, value: number) {
+  let AccountERC6551;
+  const { chain } = useNetwork();
+
+  if (chain?.name === "Polygon Mumbai") {
+    AccountERC6551 = require("./CONTRACT_CONSTANT_MUMBAI").AccountERC6551;
+  } else if (chain?.name === "Optimism Goerli") {
+    AccountERC6551 = require("./CONTRACT_CONSTANT_OP").AccountERC6551;
+  } else if (chain?.name === "Scroll Testnet") {
+    AccountERC6551 = require("./CONTRACT_CONSTANT_SCROLL").AccountERC6551;
+  }
   const {
     write,
     data: executeCallData,
@@ -26,6 +36,16 @@ export async function MakeTransfer(to: string, value: number) {
 }
 
 export async function OwnerRetrieve() {
+  let AccountERC6551;
+  const { chain } = useNetwork();
+
+  if (chain?.name === "Polygon Mumbai") {
+    AccountERC6551 = require("./CONTRACT_CONSTANT_MUMBAI").AccountERC6551;
+  } else if (chain?.name === "Optimism Goerli") {
+    AccountERC6551 = require("./CONTRACT_CONSTANT_OP").AccountERC6551;
+  } else if (chain?.name === "Scroll Testnet") {
+    AccountERC6551 = require("./CONTRACT_CONSTANT_SCROLL").AccountERC6551;
+  }
   const { data, error, isError } = useContractWrite({
     address: AccountERC6551,
     abi: AccountERC6551abi,
@@ -39,6 +59,16 @@ export async function AccountERC6551isValidSignature(
   hash: string,
   signature: string
 ) {
+  let AccountERC6551;
+  const { chain } = useNetwork();
+
+  if (chain?.name === "Polygon Mumbai") {
+    AccountERC6551 = require("./CONTRACT_CONSTANT_MUMBAI").AccountERC6551;
+  } else if (chain?.name === "Optimism Goerli") {
+    AccountERC6551 = require("./CONTRACT_CONSTANT_OP").AccountERC6551;
+  } else if (chain?.name === "Scroll Testnet") {
+    AccountERC6551 = require("./CONTRACT_CONSTANT_SCROLL").AccountERC6551;
+  }
   const { data, error, isError } = useContractWrite({
     address: AccountERC6551,
     abi: AccountERC6551abi,
@@ -50,6 +80,16 @@ export async function AccountERC6551isValidSignature(
 }
 
 export async function AccountERC6551Token() {
+  let AccountERC6551;
+  const { chain } = useNetwork();
+
+  if (chain?.name === "Polygon Mumbai") {
+    AccountERC6551 = require("./CONTRACT_CONSTANT_MUMBAI").AccountERC6551;
+  } else if (chain?.name === "Optimism Goerli") {
+    AccountERC6551 = require("./CONTRACT_CONSTANT_OP").AccountERC6551;
+  } else if (chain?.name === "Scroll Testnet") {
+    AccountERC6551 = require("./CONTRACT_CONSTANT_SCROLL").AccountERC6551;
+  }
   const { data, error, isError } = useContractRead({
     address: AccountERC6551,
     abi: AccountERC6551abi,

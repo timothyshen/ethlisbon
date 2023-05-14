@@ -1,8 +1,25 @@
-import { AccountERC6551Registry, AccountERC721 } from "./CONTRACT_CONSTANT";
-import { useContractWrite } from "wagmi";
+import { useContractWrite, useNetwork } from "wagmi";
 import { AccountERC6551Registryabi } from "./contracts/AccountERC6551Registry";
 
 export function AccountERC6551Register() {
+  let AccountERC6551Registry, AccountERC721;
+  // let AccountTokenVault;
+  const { chain } = useNetwork();
+  console.log(chain?.name);
+
+  if (chain?.name === "Polygon Mumbai") {
+    AccountERC6551Registry =
+      require("./CONTRACT_CONSTANT_MUMBAI").AccountERC6551Registry;
+    AccountERC721 = require("./CONTRACT_CONSTANT_MUMBAI").AccountERC721;
+  } else if (chain?.name === "Optimism Goerli") {
+    AccountERC6551Registry =
+      require("./CONTRACT_CONSTANT_OP").AccountERC6551Registry;
+    AccountERC721 = require("./CONTRACT_CONSTANT_OP").AccountERC721;
+  } else if (chain?.name === "Scroll Testnet") {
+    AccountERC6551Registry =
+      require("./CONTRACT_CONSTANT_SCROLL").AccountERC6551Registry;
+    AccountERC721 = require("./CONTRACT_CONSTANT_SCROLL").AccountERC721;
+  }
   const {
     data: registerData,
     write: registerAccount,
@@ -15,7 +32,6 @@ export function AccountERC6551Register() {
   });
 
   const RegisterAccount: any = async (tokenId: number) => {
-    console.log(tokenId);
     await registerAccount({
       args: [AccountERC721, tokenId],
     });
@@ -27,6 +43,23 @@ export function AccountERC6551Register() {
 }
 
 export function AccountERC6551Account() {
+  let AccountERC6551Registry, AccountERC721;
+  // let AccountTokenVault;
+  const { chain } = useNetwork();
+
+  if (chain?.name === "Polygon Mumbai") {
+    AccountERC6551Registry =
+      require("./CONTRACT_CONSTANT_MUMBAI").AccountERC6551Registry;
+    AccountERC721 = require("./CONTRACT_CONSTANT_MUMBAI").AccountERC721;
+  } else if (chain?.name === "Optimism Goerli") {
+    AccountERC6551Registry =
+      require("./CONTRACT_CONSTANT_OP").AccountERC6551Registry;
+    AccountERC721 = require("./CONTRACT_CONSTANT_OP").AccountERC721;
+  } else if (chain?.name === "Scroll Testnet") {
+    AccountERC6551Registry =
+      require("./CONTRACT_CONSTANT_SCROLL").AccountERC6551Registry;
+    AccountERC721 = require("./CONTRACT_CONSTANT_SCROLL").AccountERC721;
+  }
   const {
     data: registerData,
     write: registerAccount,
@@ -39,7 +72,6 @@ export function AccountERC6551Account() {
   });
 
   const RegisterAccount: any = async (tokenId: number) => {
-    console.log(tokenId);
     await registerAccount({
       args: [AccountERC721, tokenId],
     });
