@@ -7,32 +7,46 @@ import {
 } from "wagmi";
 import { useState } from "react";
 
+interface ContractAddresses {
+  [chainName: string]: {
+    AccountERC6551Registry: string;
+    AccountERC721: string;
+  };
+}
+
+const contractAddresses: ContractAddresses = {
+  "Polygon Mumbai": {
+    AccountTokenVault: require("./CONTRACT_CONSTANT_MUMBAI").AccountTokenVault
+  },
+  "Optimism Goerli": {
+    AccountTokenVault: require("./CONTRACT_CONSTANT_OP").AccountTokenVault
+  },
+  "Scroll Testnet": {
+    AccountTokenVault: require("./CONTRACT_CONSTANT_SCROLL").AccountTokenVault
+  },
+};
+
 export function TokenVaultInitailisation() {
-  let AccountTokenVault;
-  // let AccountTokenVault;
   const { chain } = useNetwork();
+  let AccountTokenVault;
 
   if (chain?.name === "Polygon Mumbai") {
     AccountTokenVault = require("./CONTRACT_CONSTANT_MUMBAI").AccountTokenVault;
   } else if (chain?.name === "Optimism Goerli") {
-    AccountTokenVault = require("./CONTRACT_CONSTANT_OP").AccountTokenVault;
+    AccountTokenVault: require("./CONTRACT_CONSTANT_OP").AccountTokenVault;
   } else if (chain?.name === "Scroll Testnet") {
     AccountTokenVault = require("./CONTRACT_CONSTANT_SCROLL").AccountTokenVault;
   }
 
   const { data, write, isError } = useContractWrite({
-    address: AccountTokenVault,
+    address: AccountTokenVault as `0x${string}`,
     abi: AccountTokenVaultabi,
     functionName: "initializeAccount",
   });
 
-  const initialize = async (
-    address: string,
-    amount: number,
-    dayNum: number
-  ) => {
+  async function initialize(address: string, amount: number, dayNum: number) {
     await write({ args: [address, amount, dayNum] });
-  };
+  }
 
   const {
     data: data2,
@@ -42,13 +56,12 @@ export function TokenVaultInitailisation() {
     hash: data?.hash,
   });
 
-  return { data, isError, isSuccess, isLoading };
+  return { initialize, data, isError, isSuccess, isLoading };
 }
 
 export async function TokenWithDraw() {
-  let AccountTokenVault;
-  // let AccountTokenVault;
   const { chain } = useNetwork();
+  let AccountTokenVault;
 
   if (chain?.name === "Polygon Mumbai") {
     AccountTokenVault = require("./CONTRACT_CONSTANT_MUMBAI").AccountTokenVault;

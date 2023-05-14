@@ -8,6 +8,13 @@ import {
 import { configureChains, createConfig, WagmiConfig } from "wagmi";
 import { polygonMumbai, optimismGoerli, scrollTestnet } from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
+import { LensConfig, development,  LensProvider } from "@lens-protocol/react-web";
+import { bindings as wagmiBindings } from "@lens-protocol/wagmi";
+
+const lensConfig: LensConfig = {
+  bindings: wagmiBindings(),
+  environment: development,
+};
 
 import { Providers } from "./providers";
 
@@ -22,15 +29,14 @@ const { chains, publicClient } = configureChains(
 );
 
 const { connectors } = getDefaultWallets({
-  appName: "My RainbowKit App",
-  projectId: "Membership",
-  chains,
+  appName: 'My RainbowKit App',
+  chains: chains
 });
 
-const wagmiConfig = createConfig({
+const client = createClient({
   autoConnect: true,
   connectors,
-  publicClient,
+  provider,
 });
 
 export default function RootLayout({
@@ -42,7 +48,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Providers>
-          <WagmiConfig config={wagmiConfig}>
+          <WagmiConfig client={client}>
             <RainbowKitProvider
               chains={chains}
               theme={lightTheme({
@@ -51,8 +57,10 @@ export default function RootLayout({
                 borderRadius: "medium",
               })}
             >
-              <Header />
-              {children}
+              <LensProvider config={lensConfig}>
+                <Header />
+                {children}
+              </LensProvider>
             </RainbowKitProvider>
           </WagmiConfig>
         </Providers>

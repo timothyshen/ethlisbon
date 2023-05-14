@@ -17,7 +17,7 @@ export default function Home() {
         <Card
           title={"MoonDAO"}
           link={"/moondao"}
-          imgSrc="images/profileicon.png"
+          imgSrc="images/profileIcon.png"
           subtitle={"108k Members"}
           description={
             "some description about the DAO, some sentences what its goal and idea"
@@ -26,7 +26,7 @@ export default function Home() {
         <Card
           title={"MrBeast"}
           link={"/"}
-          imgSrc="images/profileicon.png"
+          imgSrc="images/profileIcon.png"
           subtitle={"56k Members"}
           description={
             "some description about the DAO, some sentences what its goal and idea"
@@ -35,7 +35,7 @@ export default function Home() {
         <Card
           title={"Charli D’Amelio"}
           link={"/"}
-          imgSrc="images/profileicon.png"
+          imgSrc="images/profileIcon.png"
           subtitle={"167k Members"}
           description={
             "some description about the DAO, some sentences what its goal and idea"
@@ -44,7 +44,7 @@ export default function Home() {
         <Card
           title={"Marques Brownlee"}
           link={"/"}
-          imgSrc="images/profileicon.png"
+          imgSrc="images/profileIcon.png"
           subtitle={"108k Members"}
           description={
             "some description about the DAO, some sentences what its goal and idea"
@@ -53,7 +53,7 @@ export default function Home() {
         <Card
           title={"PewDiePie"}
           link={"/"}
-          imgSrc="images/profileicon.png"
+          imgSrc="images/profileIcon.png"
           subtitle={"108k Members"}
           description={
             "some description about the DAO, some sentences what its goal and idea"
@@ -62,7 +62,7 @@ export default function Home() {
         <Card
           title={"DAO Name"}
           link={"/moondao"}
-          imgSrc="images/profileicon.png"
+          imgSrc="images/profileIcon.png"
           subtitle={"108k Members"}
           description={
             "some description about the DAO, some sentences what its goal and idea"
@@ -71,7 +71,7 @@ export default function Home() {
         <Card
           title={"KSI"}
           link={"/moondao"}
-          imgSrc="images/profileicon.png"
+          imgSrc="images/profileIcon.png"
           subtitle={"108k Members"}
           description={
             "some description about the DAO, some sentences what its goal and idea"
@@ -80,7 +80,7 @@ export default function Home() {
         <Card
           title={"Ryan Trahan"}
           link={"/"}
-          imgSrc="images/profileicon.png"
+          imgSrc="images/profileIcon.png"
           subtitle={"108k Members"}
           description={
             "some description about the DAO, some sentences what its goal and idea"

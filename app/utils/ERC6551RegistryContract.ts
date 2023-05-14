@@ -1,79 +1,95 @@
 import { useContractWrite, useNetwork } from "wagmi";
 import { AccountERC6551Registryabi } from "./contracts/AccountERC6551Registry";
 
-export function AccountERC6551Register() {
-  let AccountERC6551Registry;
-  let AccountERC721;
-  // let AccountTokenVault;
-  const { chain } = useNetwork();
+interface ContractAddresses {
+  [chainName: string]: {
+    AccountERC6551Registry: string;
+    AccountERC721: string;
+  };
+}
 
-  if (chain?.name === "Polygon Mumbai") {
-    AccountERC6551Registry =
-      require("./CONTRACT_CONSTANT_MUMBAI").AccountERC6551Registry;
-    AccountERC721 = require("./CONTRACT_CONSTANT_MUMBAI").AccountERC721;
-  } else if (chain?.name === "Optimism Goerli") {
-    AccountERC6551Registry =
-      require("./CONTRACT_CONSTANT_OP").AccountERC6551Registry;
-    AccountERC721 = require("./CONTRACT_CONSTANT_OP").AccountERC721;
-  } else if (chain?.name === "Scroll Testnet") {
-    AccountERC6551Registry =
-      require("./CONTRACT_CONSTANT_SCROLL").AccountERC6551Registry;
-    AccountERC721 = require("./CONTRACT_CONSTANT_SCROLL").AccountERC721;
+const contractAddresses: ContractAddresses = {
+  "Polygon Mumbai": {
+    AccountERC6551Registry: require("./CONTRACT_CONSTANT_MUMBAI")
+      .AccountERC6551Registry,
+    AccountERC721: require("./CONTRACT_CONSTANT_MUMBAI").AccountERC721,
+  },
+  "Optimism Goerli": {
+    AccountERC6551Registry: require("./CONTRACT_CONSTANT_OP")
+      .AccountERC6551Registry,
+    AccountERC721: require("./CONTRACT_CONSTANT_OP").AccountERC721,
+  },
+  "Scroll Testnet": {
+    AccountERC6551Registry: require("./CONTRACT_CONSTANT_SCROLL")
+      .AccountERC6551Registry,
+    AccountERC721: require("./CONTRACT_CONSTANT_SCROLL").AccountERC721,
+  },
+};
+
+function getContractAddresses(chainName: string) {
+  const addresses = contractAddresses[chainName];
+  if (!addresses) {
+    throw new Error(
+      `Contract addresses not available for the selected chain: ${chainName}`
+    );
   }
+  return addresses;
+}
+
+export function AccountERC6551Register() {
+  const { chain } = useNetwork();
+  const chainName = chain?.name;
+  if (!chainName) {
+    throw new Error("Chain name is not available.");
+  }
+
+  const { AccountERC6551Registry, AccountERC721 } =
+    getContractAddresses(chainName);
+
   const {
     write: registerAccount,
     isSuccess: createSuccess,
     isError: createError,
   } = useContractWrite({
-    address: AccountERC6551Registry,
+    address: AccountERC6551Registry as `0x${string}`,
     abi: AccountERC6551Registryabi,
     functionName: "createAccount",
   });
 
-  const RegisterAccount: any = async (tokenId: number) => {
-    const { data } = await registerAccount({
+  async function RegisterAccount(tokenId: number) {
+    await registerAccount({
       args: [AccountERC721, tokenId],
     });
-    console.log(data);
-    // Wait for the transaction to be mined
-  };
+  }
 
   return { RegisterAccount, createSuccess, createError };
 }
 
 export function AccountERC6551Account() {
-  let AccountERC6551Registry, AccountERC721;
-  // let AccountTokenVault;
   const { chain } = useNetwork();
-
-  if (chain?.name === "Polygon Mumbai") {
-    AccountERC6551Registry =
-      require("./CONTRACT_CONSTANT_MUMBAI").AccountERC6551Registry;
-    AccountERC721 = require("./CONTRACT_CONSTANT_MUMBAI").AccountERC721;
-  } else if (chain?.name === "Optimism Goerli") {
-    AccountERC6551Registry =
-      require("./CONTRACT_CONSTANT_OP").AccountERC6551Registry;
-    AccountERC721 = require("./CONTRACT_CONSTANT_OP").AccountERC721;
-  } else if (chain?.name === "Scroll Testnet") {
-    AccountERC6551Registry =
-      require("./CONTRACT_CONSTANT_SCROLL").AccountERC6551Registry;
-    AccountERC721 = require("./CONTRACT_CONSTANT_SCROLL").AccountERC721;
+  const chainName = chain?.name;
+  if (!chainName) {
+    throw new Error("Chain name is not available.");
   }
+
+  const { AccountERC6551Registry, AccountERC721 } =
+    getContractAddresses(chainName);
+
   const {
     write: registerAccount,
     isSuccess: createSuccess,
     isError: createError,
   } = useContractWrite({
-    address: AccountERC6551Registry,
+    address: AccountERC6551Registry as `0x${string}`,
     abi: AccountERC6551Registryabi,
     functionName: "account",
   });
 
-  const RegisterAccount: any = async (tokenId: number) => {
+  async function RegisterAccount(tokenId: number) {
     await registerAccount({
       args: [AccountERC721, tokenId],
     });
-    console.log(registerData);
-  };
-  return { RegisterAccount, registerData, createSuccess, createError };
+  }
+
+  return { RegisterAccount, createSuccess, createError };
 }

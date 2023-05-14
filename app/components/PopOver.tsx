@@ -20,12 +20,18 @@ interface BasicPopOverProps {
 const BasicPopOver: React.FC<BasicPopOverProps> = ({ tokenID }) => {
   const { RegisterAccount } = AccountERC6551Account();
   const { chain, chains } = useNetwork();
-
+  const { initialize } = TokenVaultInitailisation();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const [address, setAddress] = useState("");
   const [amount, setAmount] = useState(0);
   const [dayNum, setDayNum] = useState(0);
+
+  const handleRegister = async () => {
+    console.log("registering");
+    const test = await RegisterAccount(tokenID);
+    console.log("test", test);
+  };
 
   return (
     <>
@@ -72,7 +78,8 @@ const BasicPopOver: React.FC<BasicPopOverProps> = ({ tokenID }) => {
               mr={3}
               onClick={() => {
                 console.log("amount", amount);
-  
+                handleRegister();
+                // initialize(RegisterAccount, amount, dayNum);
               }}
             >
               Set Vault

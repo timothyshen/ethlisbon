@@ -9,7 +9,7 @@ type JoinProps = {
 const MintButton: React.FC<JoinProps> = ({ setMintedNFT }) => {
   const { mintNFT, mintSuccess, tokenIDSuccess, balance, mintLoading } =
     ERC721Mint();
-  const { RegisterAccount, registerData, createSuccess, createError } =
+  const { RegisterAccount, createSuccess, createError } =
     AccountERC6551Register();
 
   const mintWallet = async () => {
@@ -40,7 +40,6 @@ const MintButton: React.FC<JoinProps> = ({ setMintedNFT }) => {
       </Button>
       {createSuccess && <p>Account Created</p>}
       {createError && <p>Account Creation Failed</p>}
-      {registerData && <p>Account Registered</p>}
     </>
   );
 };

@@ -6,7 +6,6 @@ export function ERC721Mint() {
   let AccountERC721;
   // let AccountTokenVault;
   const { chain } = useNetwork();
-  console.log(chain?.name);
 
   if (chain?.name === "Polygon Mumbai") {
     AccountERC721 = require("./CONTRACT_CONSTANT_MUMBAI").AccountERC721;
