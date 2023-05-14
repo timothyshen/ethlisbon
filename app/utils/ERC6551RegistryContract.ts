@@ -2,10 +2,9 @@ import { useContractWrite, useNetwork } from "wagmi";
 import { AccountERC6551Registryabi } from "./contracts/AccountERC6551Registry";
 
 export function AccountERC6551Register() {
-  let AccountERC6551Registry, AccountERC721;
+  let AccountERC6551Registry: any, AccountERC721: any;
   // let AccountTokenVault;
   const { chain } = useNetwork();
-  console.log(chain?.name);
 
   if (chain?.name === "Polygon Mumbai") {
     AccountERC6551Registry =
@@ -75,6 +74,7 @@ export function AccountERC6551Account() {
     await registerAccount({
       args: [AccountERC721, tokenId],
     });
+    console.log(registerData);
   };
   return { RegisterAccount, registerData, createSuccess, createError };
 }
