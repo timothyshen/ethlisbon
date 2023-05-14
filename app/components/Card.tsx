@@ -19,9 +19,10 @@ const Card: React.FC<CardProps> = ({
     maxW="sm"
     borderWidth="1px"
     borderRadius="12px"
+    borderColor={'#E5E7EB'}
     width={"230px"}
+    backgroundColor={'white'}
   >
-    <Box></Box>
     <Box p="16px">
       <Flex alignItems="center" flexDirection={"column"} paddingTop={"8px"}>
         <Image src={imgSrc} alt={title} boxSize={"96px"} />

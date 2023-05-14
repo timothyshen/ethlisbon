@@ -1,6 +1,5 @@
 "use client";
-
-import { Box, Flex, Text } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
 import MembershipCard from "./membershipCard";
 import ProfileCard from "./profileCard";
 
@@ -24,7 +23,7 @@ export default function Home() {
         >
           <MembershipCard
             title={"Gold Membership"}
-            imgSrc="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHZAq08u4YaR0Jsu2CgeptdxC74y-9QEeFYEAb6YHP&s"
+            imgSrc="images/card.png"
             subtitle={"108k Members"}
             description={
               "MoonDAO`s mission is to create a self-sustaining, self-governing "
@@ -33,7 +32,7 @@ export default function Home() {
           />
           <MembershipCard
             title={"Gold Membership"}
-            imgSrc="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHZAq08u4YaR0Jsu2CgeptdxC74y-9QEeFYEAb6YHP&s"
+            imgSrc="images/card.png"
             subtitle={"108k Members"}
             description={
               "MoonDAO`s mission is to create a self-sustaining, self-governing "
@@ -42,7 +41,7 @@ export default function Home() {
           />
           <MembershipCard
             title={"Gold Membership"}
-            imgSrc="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHZAq08u4YaR0Jsu2CgeptdxC74y-9QEeFYEAb6YHP&s"
+            imgSrc="images/card.png"
             subtitle={"108k Members"}
             description={
               "MoonDAO`s mission is to create a self-sustaining, self-governing "
@@ -51,7 +50,7 @@ export default function Home() {
           />
           <MembershipCard
             title={"Gold Membership"}
-            imgSrc="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHZAq08u4YaR0Jsu2CgeptdxC74y-9QEeFYEAb6YHP&s"
+            imgSrc="images/card.png"
             subtitle={"108k Members"}
             description={
               "MoonDAO`s mission is to create a self-sustaining, self-governing "

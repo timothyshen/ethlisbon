@@ -16,8 +16,44 @@ export default function Home() {
         rowGap={"30px"}
       >
         <Card
-          title={"DAO Name"}
+          title={"MoonDAO"}
           link={"/moondao"}
+          imgSrc="images/profileicon.png"
+          subtitle={"108k Members"}
+          description={
+            "some description about the DAO, some sentences what its goal and idea"
+          }
+        />
+        <Card
+          title={"MrBeast"}
+          link={"/"}
+          imgSrc="images/profileicon.png"
+          subtitle={"56k Members"}
+          description={
+            "some description about the DAO, some sentences what its goal and idea"
+          }
+        />
+        <Card
+          title={"Charli D’Amelio"}
+          link={"/"}
+          imgSrc="images/profileicon.png"
+          subtitle={"167k Members"}
+          description={
+            "some description about the DAO, some sentences what its goal and idea"
+          }
+        />
+        <Card
+          title={"Marques Brownlee"}
+          link={"/"}
+          imgSrc="images/profileicon.png"
+          subtitle={"108k Members"}
+          description={
+            "some description about the DAO, some sentences what its goal and idea"
+          }
+        />
+        <Card
+          title={"PewDiePie"}
+          link={"/"}
           imgSrc="images/profileicon.png"
           subtitle={"108k Members"}
           description={
@@ -34,7 +70,7 @@ export default function Home() {
           }
         />
         <Card
-          title={"DAO Name"}
+          title={"KSI"}
           link={"/moondao"}
           imgSrc="images/profileicon.png"
           subtitle={"108k Members"}
@@ -43,44 +79,8 @@ export default function Home() {
           }
         />
         <Card
-          title={"DAO Name"}
-          link={"/moondao"}
-          imgSrc="images/profileicon.png"
-          subtitle={"108k Members"}
-          description={
-            "some description about the DAO, some sentences what its goal and idea"
-          }
-        />
-        <Card
-          title={"DAO Name"}
-          link={"/moondao"}
-          imgSrc="images/profileicon.png"
-          subtitle={"108k Members"}
-          description={
-            "some description about the DAO, some sentences what its goal and idea"
-          }
-        />
-        <Card
-          title={"DAO Name"}
-          link={"/moondao"}
-          imgSrc="images/profileicon.png"
-          subtitle={"108k Members"}
-          description={
-            "some description about the DAO, some sentences what its goal and idea"
-          }
-        />
-        <Card
-          title={"DAO Name"}
-          link={"/moondao"}
-          imgSrc="images/profileicon.png"
-          subtitle={"108k Members"}
-          description={
-            "some description about the DAO, some sentences what its goal and idea"
-          }
-        />
-        <Card
-          title={"DAO Name"}
-          link={"/moondao"}
+          title={"Ryan Trahan"}
+          link={"/"}
           imgSrc="images/profileicon.png"
           subtitle={"108k Members"}
           description={
