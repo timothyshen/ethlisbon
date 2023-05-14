@@ -12,7 +12,7 @@ export function FollowButton({followee,follower}:ProfileFollowProps) {
 
   return (
     <Button onClick={follow} disabled={isPending} backgroundColor={'rgb(171 254 44)'} color={'0 80 30'} width={'full'} mt={'10px'}>
-      {followee.isFollowedByMe ? 'Following' : isPending ? 'Follow in progress...' : 'Follow'}
+      { isPending ? 'Follow in progress...' : followee.isFollowedByMe ? 'Following' : 'Follow' }
     </Button>
   );
 }

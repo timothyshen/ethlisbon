@@ -19,7 +19,7 @@ export default function Home() {
         />
         <Flex justifyContent={"space-between"} flexWrap={"wrap"}>
           <Box position={'relative'} height='500px' width={'500px'}>
-            <Image src="/images/profile.png" alt={"profile"} width={"600px"} height={'fit-content'} />
+            <Image src="/images/seven.png" alt={"profile"} width={"600px"} height={'fit-content'} />
             <Flex flexDirection={'column'} position={'absolute'} float={'left'} zIndex={'1000'} bottom={'10px'} left={'20px'}>
               <Box backgroundColor={'white'} opacity={'25%'} width={'200px'} height={'20px'} borderRadius={'5px 5px 0px 0px'}>
                 <Text color={'black'} fontWeight={'semibold'} textAlign={'center'} fontSize={'12px'}>0x2c934...a180</Text>

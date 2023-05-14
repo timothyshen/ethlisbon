@@ -16,9 +16,9 @@ export default function Home() {
         rowGap={"30px"}
       >
         <Card
-          title={"MoonDAO"}
+          title={"Lens"}
           link={"/moondao"}
-          imgSrc="images/profileIcon.png"
+          imgSrc="images/lens.png"
           subtitle={"108k Members"}
           description={
             "some description about the DAO, some sentences what its goal and idea"
