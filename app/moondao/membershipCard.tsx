@@ -26,7 +26,7 @@ const MembershipCard: React.FC<CardProps> = ({
     borderColor={'#E5E7EB'}
   >
     <Image src={imgSrc} alt={title} width={'224px'} />
-        <Text color="black" fontSize={"18px"} fontWeight={'semibold'}>
+        <Text color="black" fontSize={"18px"} fontWeight={'semibold'} mt={'5px'}>
           {title}
         </Text>
         <Text fontSize={'12px'} fontWeight={'semibold'} color={'#4C1D95'}>{subtitle}</Text>
